@@ -17,13 +17,27 @@
           pname = "pinentry-touchid";
           inherit version;
 
+          nativeBuildInputs = with pkgs; [
+            gnutar
+          ];
+
+          propagatedBuildInputs = with pkgs; [
+            pinentry_mac
+            gnupg
+          ];
+
           src = pkgs.fetchurl {
             url = "https://github.com/jorgelbg/pinentry-touchid/releases/download/${version}/pinentry-touchid_0.0.3_macos_arm64.tar.gz";
             inherit sha256;
           };
 
+          unpackPhase = ''
+            mkdir -p unpack_dir
+            tar -xzf $src -C unpack_dir
+          '';
+
           installPhase = ''
-            install -D -m755 pinentry-touchid_0.0.3_macos_arm64/pinentry-touchid $out/bin/pinentry-touchid
+            install -D -m755 unpack_dir/pinentry-touchid $out/bin/pinentry-touchid
           '';
 
           meta = with pkgs.lib; {
