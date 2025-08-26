@@ -22,8 +22,6 @@
             inherit sha256;
           };
 
-          sourceRoot = ".";
-
           installPhase = ''
             install -D -m755 pinentry-touchid_0.0.3_macos_arm64/pinentry-touchid $out/bin/pinentry-touchid
           '';
