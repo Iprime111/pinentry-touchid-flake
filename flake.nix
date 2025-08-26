@@ -1,16 +1,16 @@
 {
-  description = "Пакет для бинарного файла из GitHub";
+  description = "Pinentry-touchid custom flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, ... }:
     let
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
       version = "v0.0.3";
-      sha256 = "0wkppmlq4795xpikmcjalsmy12d9519ph0p4x9gf8v435sh2873g"; # Замените на актуальный хэш
+      sha256 = "0wkppmlq4795xpikmcjalsmy12d9519ph0p4x9gf8v435sh2873g"; 
     in {
       packages.${system} = {
         pinentry-touchid = pkgs.stdenv.mkDerivation {
@@ -22,7 +22,6 @@
             inherit sha256;
           };
 
-          # Определите source root если нужно
           sourceRoot = ".";
 
           installPhase = ''
