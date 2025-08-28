@@ -37,7 +37,7 @@
           '';
 
           installPhase = ''
-            install -D -m755 unpack_dir/pinentry-touchid $out/bin/pinentry-touchid
+            install -D -m755 unpack_dir/pinentry-touchid $out/bin/pinentry
           '';
 
           meta = with pkgs.lib; {
